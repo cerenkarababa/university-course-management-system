@@ -10,7 +10,7 @@ export class Student {
     this.name = name;
     this.courses = courses;
   }
-
+  // Adds a new course and its grade to the student's course list.
   addCourse(courseId, grade) {
     this.courses.push({ courseId, grade });
   }
