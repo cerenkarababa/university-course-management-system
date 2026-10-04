@@ -1,15 +1,10 @@
 export function calculateClassAverage(students, courseId) {
-  const grades = [];
-
-  students.forEach((student) => {
-    const course = student.courses.find(
-      (course) => course.courseId === courseId
-    );
-
-    if (course) {
-      grades.push(course.grade);
-    }
-  });
+  const grades = students
+    .map((student) =>
+      student.courses.find((course) => course.courseId === courseId)
+    )
+    .filter((course) => course !== undefined)
+    .map((course) => course.grade);
 
   if (grades.length === 0) {
     return 0;
