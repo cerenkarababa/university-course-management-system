@@ -20,7 +20,11 @@ fetchStudents((rawData) => {
   console.log(`Original ID: ${students[0].id}`);
   console.log("Attempting to change ID to 999...");
 
-  students[0].id = 999;
+  try {
+    students[0].id = 999;
+  } catch (error) {
+    console.log("ID is read-only, so the change was rejected.");
+  }
 
   console.log(
     `Final ID: ${students[0].id} (Success: ID did not change)`
@@ -30,11 +34,10 @@ fetchStudents((rawData) => {
   const classAverage = calculateClassAverage(students, 101);
   const topStudent = findTopStudent(students);
 
-  const course102Students = filterStudents(
-    students,
-    (student) =>
-      student.courses.some((course) => course.courseId === 102)
-  );
+  const hasCourse102 = (student) =>
+    student.courses.some((course) => course.courseId === 102);
+
+  const course102Students = filterStudents(students, hasCourse102);
 
   console.log("--- Analytics Report ---");
   console.log(
